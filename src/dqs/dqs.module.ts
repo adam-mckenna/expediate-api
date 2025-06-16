@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
-import { DqsController } from './dqs.controller';
-import { DqsService } from './dqs.service';
+import { Module } from "@nestjs/common";
+import { DqsService } from "./dqs.service";
+import { DqsController } from "./dqs.controller";
 
 @Module({
   controllers: [DqsController],

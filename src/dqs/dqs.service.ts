@@ -1,11 +1,25 @@
-import { Injectable } from '@nestjs/common';
-import { FoodItemDto } from './dto/food-item.dto';
+import { Injectable } from "@nestjs/common";
+import { DqsDto } from "./dto/dqsDto";
 
 @Injectable()
 export class DqsService {
-  handleFoodItems(foodItems: FoodItemDto[]): FoodItemDto[] {
-    // You can add business logic here
-    console.log(foodItems);
-    return foodItems;
+  create(createDqDto: DqsDto) {
+    return "This action adds a new dq";
+  }
+
+  findAll() {
+    return `This action returns all dqs`;
+  }
+
+  findOne(id: number) {
+    return `This action returns a #${id} dq`;
+  }
+
+  update(id: number, updateDqDto) {
+    return `This action updates a #${id} dq`;
+  }
+
+  remove(id: number) {
+    return `This action removes a #${id} dq`;
   }
 }
