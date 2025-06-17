@@ -1,11 +1,17 @@
 import { Injectable } from "@nestjs/common";
 import { LogDto } from "./dto/logDto";
+import { parseLoggedFood } from "./utils/parseLoggedFood";
 
 @Injectable()
 export class LogService {
-  create(createDqDto: LogDto) {
-    console.log(createDqDto);
-    return "This action adds a new dq";
+  create(logDto: LogDto) {
+    const logs =
+      logDto
+      .food
+      .split(",")
+      .map(log => parseLoggedFood(log))
+    
+    return logs
   }
 
   findAll() {
