@@ -1,7 +1,7 @@
 import { Module } from "@nestjs/common";
-import { DqsModule } from "./dqs/dqs.module";
+import { LogModule } from "./log/log.module";
 
 @Module({
-  imports: [DqsModule],
+  imports: [LogModule],
 })
 export class AppModule {}

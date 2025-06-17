@@ -1,14 +1,15 @@
 import { Injectable } from "@nestjs/common";
-import { DqsDto } from "./dto/dqsDto";
+import { LogDto } from "./dto/logDto";
 
 @Injectable()
-export class DqsService {
-  create(createDqDto: DqsDto) {
+export class LogService {
+  create(createDqDto: LogDto) {
+    console.log(createDqDto);
     return "This action adds a new dq";
   }
 
   findAll() {
-    return `This action returns all dqs`;
+    return `This action returns all Log`;
   }
 
   findOne(id: number) {
