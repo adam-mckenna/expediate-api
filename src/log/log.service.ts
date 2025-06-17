@@ -5,13 +5,9 @@ import { parseLoggedFood } from "./utils/parseLoggedFood";
 @Injectable()
 export class LogService {
   create(logDto: LogDto) {
-    const logs =
-      logDto
-      .food
-      .split(",")
-      .map(log => parseLoggedFood(log))
-    
-    return logs
+    const logs = logDto.food.split(",").map((log) => parseLoggedFood(log));
+
+    return logs;
   }
 
   findAll() {
