@@ -9,7 +9,8 @@ const UNITS = [
   "piece",
 ];
 type Unit = (typeof UNITS)[number];
-const isUnit = (unit: string): unit is Unit => UNITS.includes(unit);
+const isUnit = (unit: string): unit is Unit =>
+  UNITS.includes(unit) || UNITS.map((UNIT) => `${UNIT}s`).includes(unit);
 
 export const parseLoggedFood = (log) => {
   const parts = log.trim().toLowerCase().split(" ");

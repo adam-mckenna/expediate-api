@@ -2,13 +2,17 @@ import { Injectable } from "@nestjs/common";
 import { LogDto } from "./dto/logDto";
 import { parseLoggedFood } from "./utils/parseLoggedFood";
 import { CategoriserService } from "./../categoriser/categoriser.service";
+import { ScorerService } from "./../scorer/scorer.service";
 
 @Injectable()
 export class LogService {
-  constructor(private foodCategoriser: CategoriserService) {}
+  constructor(
+    private foodCategoriser: CategoriserService,
+    private scorerService: ScorerService,
+  ) {}
 
   create({ log }: LogDto) {
-    const logs = log
+    const mappedLog = log
       .split(",")
       .map(parseLoggedFood)
       .map((log) => ({
@@ -16,6 +20,6 @@ export class LogService {
         ...log,
       }));
 
-    return logs;
+    return this.scorerService.score(mappedLog);
   }
 }
