@@ -13,23 +13,19 @@ Fitzgerald's DQS follows a point-based system based on two factors:
 1. The _quality_ of the food
 2. The _quantity_ of the food
 
-
-
 | **Food Type**         | **1st** | **2nd** | **3rd** | **4th** | **5th** | **6th** |
-|-----------------------|--------:|--------:|--------:|--------:|--------:|--------:|
-| **Fruits**            | 2       | 2       | 2       | 1       | 0       | 0       |
-| **Vegetables**        | 2       | 2       | 2       | 1       | 0       | 0       |
-| **Lean meats & fish** | 2       | 2       | 1       | 0       | 0       | -1      |
-| **Nuts & seeds**      | 2       | 2       | 1       | 0       | 0       | -1      |
-| **Whole grains**      | 2       | 2       | 1       | 0       | 0       | -1      |
-| **Dairy**             | 1       | 1       | 1       | 0       | -1      | -2      |
-| **Refined grains**    | -1      | -1      | -2      | -2      | -2      | -2      |
-| **Sweets**            | -2      | -2      | -2      | -2      | -2      | -2      |
-| **Fried foods**       | -2      | -2      | -2      | -2      | -2      | -2      |
-| **Fatty proteins**    | -1      | -1      | -2      | -2      | -2      | -2      |
+| --------------------- | ------: | ------: | ------: | ------: | ------: | ------: |
+| **Fruits**            |       2 |       2 |       2 |       1 |       0 |       0 |
+| **Vegetables**        |       2 |       2 |       2 |       1 |       0 |       0 |
+| **Lean meats & fish** |       2 |       2 |       1 |       0 |       0 |      -1 |
+| **Nuts & seeds**      |       2 |       2 |       1 |       0 |       0 |      -1 |
+| **Whole grains**      |       2 |       2 |       1 |       0 |       0 |      -1 |
+| **Dairy**             |       1 |       1 |       1 |       0 |      -1 |      -2 |
+| **Refined grains**    |      -1 |      -1 |      -2 |      -2 |      -2 |      -2 |
+| **Sweets**            |      -2 |      -2 |      -2 |      -2 |      -2 |      -2 |
+| **Fried foods**       |      -2 |      -2 |      -2 |      -2 |      -2 |      -2 |
+| **Fatty proteins**    |      -1 |      -1 |      -2 |      -2 |      -2 |      -2 |
 
 ## 🧑‍💻 Tech
 
 This API is built using [Nest.js](https://docs.nestjs.com/).
-
-

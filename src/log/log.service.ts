@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { LogDto } from "./dto/logDto";
 import { parseLoggedFood } from "./utils/parseLoggedFood";
-import { CategoriserService } from "src/categoriser/categoriser.service";
+import { CategoriserService } from "./../categoriser/categoriser.service";
 
 @Injectable()
 export class LogService {

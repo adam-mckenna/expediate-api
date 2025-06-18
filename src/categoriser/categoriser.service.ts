@@ -27,7 +27,8 @@ const FoodCategoryMap: Record<FoodType, string[]> = {
   unknown: [],
 };
 
-const pluralise = (word: string): string => word.endsWith("s") ? word.slice(0, -1) : `${word}s`;
+const pluralise = (word: string): string =>
+  word.endsWith("s") ? word.slice(0, -1) : `${word}s`;
 
 const FoodCategoriser = (food: string): FoodType => {
   for (const [category, foods] of Object.entries(FoodCategoryMap)) {
