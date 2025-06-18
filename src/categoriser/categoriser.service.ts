@@ -1,27 +1,45 @@
 import { Injectable } from "@nestjs/common";
 
-import { CategoriserInterface } from "src/interfaces/CategoriserInterface";
+import {
+  CategoriserInterface,
+  FoodType,
+} from "src/interfaces/CategoriserInterface";
 
-const WHOLE_GRAINS = ["oats", "brown rice", "wholemeal pasta"];
-type WholeGrain = (typeof WHOLE_GRAINS)[number];
-const isWholeGrain = (food: string): food is WholeGrain =>
-  WHOLE_GRAINS.includes(food) ||
-  WHOLE_GRAINS.map((grain) => `${grain}s`).includes(food);
+const FoodCategoryMap: Record<FoodType, string[]> = {
+  fruit: ["banana", "apple", "orange", "kiwi"],
+  vegetable: [
+    "broccoli",
+    "lettuce",
+    "tomato",
+    "aubergine",
+    "courgette",
+    "sweet potato",
+    "beetroot",
+  ],
+  "lean-meat-and-fish": ["chicken", "salmon", "tuna"],
+  "nuts-seeds": ["almond", "walnut", "chia seed"],
+  "whole-grain": ["brown rice", "oats", "quinoa", "wholemeal pasta"],
+  dairy: ["milk", "cheese", "yogurt"],
+  "refined-grains": ["white bread", "white pasta"],
+  sweets: ["chocolate", "cake", "biscuits"],
+  "fatty-foods": ["butter", "oil", "margarine"],
+  "fatty-proteins": ["bacon", "sausages"],
+  unknown: [],
+};
 
-const FRUIT = ["banana", "apple", "orange"];
-type Fruit = (typeof WHOLE_GRAINS)[number];
-const isFruit = (food: string): food is Fruit =>
-  FRUIT.includes(food) || FRUIT.map((fruit) => `${fruit}s`).includes(food);
+const pluralise = (word: string): string => word.endsWith("s") ? word.slice(0, -1) : `${word}s`;
 
+const FoodCategoriser = (food: string): FoodType => {
+  for (const [category, foods] of Object.entries(FoodCategoryMap)) {
+    if (foods.includes(food) || foods.includes(pluralise(food))) {
+      return category as FoodType;
+    }
+  }
+  return "unknown";
+};
 @Injectable()
 export class CategoriserService implements CategoriserInterface {
-  categorise(food: string) {
-    if (isWholeGrain(food)) {
-      return "whole-grain";
-    }
-    if (isFruit(food)) {
-      return "fruit";
-    }
-    return "unknown";
+  categorise(food: string): FoodType {
+    return FoodCategoriser(food);
   }
 }
