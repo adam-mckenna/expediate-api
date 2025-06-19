@@ -15,6 +15,7 @@ const FoodCategoryMap: Record<FoodType, string[]> = {
     "courgette",
     "sweet potato",
     "beetroot",
+    "kohlrabi"
   ],
   "lean-meat-and-fish": ["chicken", "salmon", "tuna"],
   "nuts-seeds": ["almond", "walnut", "chia seed"],
