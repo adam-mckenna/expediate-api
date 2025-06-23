@@ -1,15 +1,15 @@
 import { Injectable } from "@nestjs/common";
 import { LogDto } from "./dto/logDto";
-import { ParserService } from "src/parser/parser.service";
-import { CategoriserService } from "src/categoriser/categoriser.service";
-import { ScorerService } from "src/scorer/scorer.service";
+import { CategoriserService } from "./../categoriser/categoriser.service";
+import { ScorerService } from "./../scorer/scorer.service";
+import { TransformerService } from "./../transformer/transformer.service";
 
 @Injectable()
 export class LogService {
   constructor(
-    private parserService: ParserService,
     private foodCategoriser: CategoriserService,
     private scorerService: ScorerService,
+    private parserService: TransformerService,
   ) {}
 
   create({ log }: LogDto) {

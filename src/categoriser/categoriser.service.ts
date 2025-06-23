@@ -3,7 +3,7 @@ import { Injectable } from "@nestjs/common";
 import {
   CategoriserInterface,
   FoodType,
-} from "src/interfaces/CategoriserInterface";
+} from "src/categoriser/categoriser.interface";
 
 // todo: create a function that seperates adjectives or whatever like "low-fat", "brown", etc and categorises based on that
 const FoodCategoryMap: Record<FoodType, string[]> = {

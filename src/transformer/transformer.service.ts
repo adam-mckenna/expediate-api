@@ -15,7 +15,7 @@ const isUnit = (unit: string): unit is Unit =>
   UNITS.includes(unit) || UNITS.map((UNIT) => `${UNIT}s`).includes(unit);
 
 @Injectable()
-export class ParserService {
+export class TransformerService {
   parse(log) {
     const parts = log.trim().toLowerCase().split(" ");
 

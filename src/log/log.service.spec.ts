@@ -1,15 +1,15 @@
 import { Test, TestingModule } from "@nestjs/testing";
 import { LogService } from "./log.service";
-import { ParserService } from "src/parser/parser.service";
-import { CategoriserService } from "src/categoriser/categoriser.service";
-import { ScorerService } from "src/scorer/scorer.service";
+import { TransformerService } from "./../transformer/transformer.service";
+import { CategoriserService } from "./../categoriser/categoriser.service";
+import { ScorerService } from "./../scorer/scorer.service";
 
 describe("LogService", () => {
   let service: LogService;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
-      providers: [LogService, ParserService, CategoriserService, ScorerService],
+      providers: [LogService, TransformerService, CategoriserService, ScorerService],
     }).compile();
 
     service = module.get<LogService>(LogService);
