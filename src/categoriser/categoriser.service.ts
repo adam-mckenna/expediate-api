@@ -5,6 +5,7 @@ import {
   FoodType,
 } from "src/interfaces/CategoriserInterface";
 
+// todo: create a function that seperates adjectives or whatever like "low-fat", "brown", etc and categorises based on that
 const FoodCategoryMap: Record<FoodType, string[]> = {
   fruit: ["banana", "apple", "orange", "kiwi"],
   vegetable: [
@@ -15,16 +16,42 @@ const FoodCategoryMap: Record<FoodType, string[]> = {
     "courgette",
     "sweet potato",
     "beetroot",
-    "kohlrabi"
+    "kohlrabi",
+    "carrot",
   ],
-  "lean-meat-and-fish": ["chicken", "salmon", "tuna"],
-  "nuts-seeds": ["almond", "walnut", "chia seed"],
-  "whole-grain": ["brown rice", "oats", "quinoa", "wholemeal pasta"],
-  dairy: ["milk", "cheese", "yogurt"],
-  "refined-grains": ["white bread", "white pasta"],
-  sweets: ["chocolate", "cake", "biscuits"],
-  "fatty-foods": ["butter", "oil", "margarine"],
-  "fatty-proteins": ["bacon", "sausages"],
+  "lean-meat-and-fish": [
+    "chicken breast",
+    "salmon",
+    "tuna",
+    "turkey breast",
+    "low fat turkey",
+  ],
+  "nuts-seeds": [
+    "almond",
+    "walnut",
+    "chia seed",
+    "peanut butter",
+    "sesame seed",
+  ],
+  "whole-grain": [
+    "brown rice",
+    "oats",
+    "quinoa",
+    "wholemeal pasta",
+    "wholemeal flour",
+  ],
+  dairy: ["milk", "cheese", "yogurt", "kefir", "feta cheese"],
+  "refined-grains": ["white bread", "pasta", "white rice"],
+  sweets: ["chocolate", "cake", "biscuits", "sweets"],
+  "fried-foods": [
+    "butter",
+    "oil",
+    "margarine",
+    "crisps",
+    "fried chicken",
+    "tempura",
+  ],
+  "fatty-proteins": ["bacon", "sausage", "chicken thigh", "steak"],
   unknown: [],
 };
 

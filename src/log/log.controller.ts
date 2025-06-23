@@ -8,7 +8,7 @@ export class LogController {
   constructor(private readonly logService: LogService) {}
 
   @Post()
-  create(@Body() dqsDto: LogDto) {
-    return this.logService.create(dqsDto);
+  create(@Body() logDto: LogDto) {
+    return this.logService.create(logDto);
   }
 }

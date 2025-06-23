@@ -7,7 +7,7 @@ export type FoodType =
   | "dairy"
   | "refined-grains"
   | "sweets"
-  | "fatty-foods"
+  | "fried-foods"
   | "fatty-proteins"
   | "unknown";
 
