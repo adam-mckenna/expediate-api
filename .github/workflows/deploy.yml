@@ -13,6 +13,9 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Run unit tets
+        run: npm run test
+
       - name: Setup SSH
         uses: webfactory/ssh-agent@v0.8.0
         with:

@@ -15,6 +15,9 @@ export const CategoryScores: Record<FoodType, number[]> = {
   unknown: [0],
 };
 
+// Note for the future: could potentially create a ScorerServiceInterface and convert this into
+// a specific "DQSScoringService" - that will give the option to easily plug-and-play different
+// food scoring systems if desired. Same for DQSCategoriserService, etc.
 @Injectable()
 export class ScorerService {
   score(log) {
