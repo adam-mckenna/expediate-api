@@ -28,7 +28,7 @@ jobs:
           ssh -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             cd ${{ secrets.EC2_PATH }}
             git pull origin main
-            npm install
+            npm i
             npm run build
             pm2 restart all || npm run start &
           EOF

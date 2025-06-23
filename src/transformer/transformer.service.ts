@@ -1,41 +1,52 @@
 import { Injectable } from "@nestjs/common";
 
-const UNITS = [
+import * as z from "zod/v4";
+
+const UnitSchema = z.enum([
   "portion",
+  "portions",
   "slice",
+  "slices",
   "cup",
+  "cups",
   "tbsp",
+  "tbsps",
   "tsp",
+  "tsps",
   "glass",
+  "glasses",
   "bottle",
+  "bottles",
   "piece",
-];
-type Unit = (typeof UNITS)[number];
-const isUnit = (unit: string): unit is Unit =>
-  UNITS.includes(unit) || UNITS.map((UNIT) => `${UNIT}s`).includes(unit);
+  "pieces",
+]);
+type UnitType = z.infer<typeof UnitSchema>;
 
 @Injectable()
 export class TransformerService {
-  parse(log) {
+  parse = (log) => {
+    // This splits the string into parts which can be individually broken down.
     const parts = log.trim().toLowerCase().split(" ");
 
-    let quantity = parseFloat(parts[0]);
+    let index = 0;
+
+    // The quantity is generally provided first.
+    let quantity = parseFloat(parts[index]);
     const hasNotProvidedQuantity = isNaN(quantity);
     if (hasNotProvidedQuantity) {
       quantity = 1;
+    } else {
+      index = index + 1;
     }
 
-    let startingFoodIndex: number = hasNotProvidedQuantity ? 0 : 1;
-    let unit: Unit | null = null;
+    let unit: UnitType | null = this.getUnit(parts[index]);
+    if (unit) {
+      index = index + 1;
+    }
+
     let food: string = "";
-
-    if (isUnit(parts[1])) {
-      unit = parts[1];
-      startingFoodIndex = 2;
-    }
-
-    for (let i = startingFoodIndex; i < parts.length; i++) {
-      food += `${parts[i]} `;
+    for (let j = index; j < parts.length; j++) {
+      food += `${parts[j]} `;
     }
 
     return {
@@ -43,5 +54,10 @@ export class TransformerService {
       unit,
       food: food.trim(),
     };
+  };
+
+  getUnit(string) {
+    const { data, success } = UnitSchema.safeParse(string);
+    return success ? data : null;
   }
 }

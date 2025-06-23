@@ -28,6 +28,13 @@ describe("TransformerService", () => {
     expect(unit).toBe(null);
   });
 
+  it("should return a unit even when no quantity provided", () => {
+    const log = "portion white bread";
+    const { unit, quantity } = service.parse(log);
+    expect(unit).toBe("portion");
+    expect(quantity).toBe(1);
+  });
+
   it("should return a quanity", () => {
     const log = "20 lembas breadrolls";
     const { quantity } = service.parse(log);

@@ -1,7 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { FoodType } from "src/categoriser/categoriser.interface";
 
-export const CategoryScores: Record<FoodType, number[]> = {
+import { FoodCategory } from "src/categoriser/category.type";
+
+export const CategoryScores: Record<FoodCategory, number[]> = {
   fruit: [2, 2, 2, 1, 0, 0],
   vegetables: [2, 2, 2, 1, 0, 0],
   "lean-meat-and-fish": [2, 2, 1, 0, 0, -1],

@@ -1,12 +1,10 @@
 import { Injectable } from "@nestjs/common";
 
-import {
-  CategoriserInterface,
-  FoodType,
-} from "src/categoriser/categoriser.interface";
+import { CategoriserInterface } from "src/categoriser/categoriser.interface";
+import { FoodCategory } from "src/categoriser/category.type";
 
 // todo: create a function that seperates adjectives or whatever like "low-fat", "brown", etc and categorises based on that
-const FoodCategoryMap: Record<FoodType, string[]> = {
+const FoodCategoryMap: Record<FoodCategory, string[]> = {
   fruit: ["banana", "apple", "orange", "kiwi"],
   vegetables: [
     "broccoli",
@@ -59,17 +57,17 @@ const FoodCategoryMap: Record<FoodType, string[]> = {
 const pluralise = (word: string): string =>
   word.endsWith("s") ? word.slice(0, -1) : `${word}s`;
 
-const FoodCategoriser = (food: string): FoodType => {
+const FoodCategoriser = (food: string): FoodCategory => {
   for (const [category, foods] of Object.entries(FoodCategoryMap)) {
     if (foods.includes(food) || foods.includes(pluralise(food))) {
-      return category as FoodType;
+      return category as FoodCategory;
     }
   }
   return "unknown";
 };
 @Injectable()
 export class CategoriserService implements CategoriserInterface {
-  categorise(food: string): FoodType {
+  categorise(food: string): FoodCategory {
     return FoodCategoriser(food);
   }
 }
