@@ -23,4 +23,48 @@ describe("LogService", () => {
   it("should be defined", () => {
     expect(service).toBeDefined();
   });
+
+  it("should category my breakfast", () => {
+    const payload = {
+      log: "oats, peanut butter, 1 banana, 1 portion milk, honey",
+    };
+    const { totalScore, scoredLogs } = service.create(payload);
+    expect(scoredLogs.length).toBe(5);
+    expect(totalScore).toBe(5);
+    expect(scoredLogs[0]).toStrictEqual({
+      category: "whole-grains",
+      quantity: 1,
+      unit: null,
+      food: "oats",
+      score: 2,
+    });
+    expect(scoredLogs[1]).toStrictEqual({
+      category: "nuts-seeds",
+      quantity: 1,
+      unit: null,
+      food: "peanut butter",
+      score: 2,
+    });
+    expect(scoredLogs[2]).toStrictEqual({
+      category: "fruit",
+      quantity: 1,
+      unit: null,
+      food: "banana",
+      score: 2,
+    });
+    expect(scoredLogs[3]).toStrictEqual({
+      category: "dairy",
+      quantity: 1,
+      unit: "portion",
+      food: "milk",
+      score: 1,
+    });
+    expect(scoredLogs[4]).toStrictEqual({
+      category: "sweets",
+      quantity: 1,
+      unit: null,
+      food: "honey",
+      score: -2,
+    });
+  });
 });

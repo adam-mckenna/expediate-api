@@ -19,15 +19,14 @@ export class TransformerService {
   parse(log) {
     const parts = log.trim().toLowerCase().split(" ");
 
-    // ToDo: an error has occurred, figure out how to handle this.
-    if (parts.length < 2) return null;
+    let quantity = parseFloat(parts[0]);
+    const hasNotProvidedQuantity = isNaN(quantity);
+    if (hasNotProvidedQuantity) {
+      quantity = 1;
+    }
 
-    const quantity = parseFloat(parts[0]);
-    // ToDo: an error has occurred, figure out how to handle this.
-    if (isNaN(quantity)) return null;
-
+    let startingFoodIndex: number = hasNotProvidedQuantity ? 0 : 1;
     let unit: Unit | null = null;
-    let startingFoodIndex: number = 1;
     let food: string = "";
 
     if (isUnit(parts[1])) {

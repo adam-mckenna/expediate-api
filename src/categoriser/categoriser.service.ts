@@ -43,7 +43,7 @@ const FoodCategoryMap: Record<FoodType, string[]> = {
   ],
   dairy: ["milk", "cheese", "yogurt", "kefir", "feta cheese"],
   "refined-grains": ["white bread", "pasta", "white rice"],
-  sweets: ["chocolate", "cake", "biscuits", "sweets"],
+  sweets: ["chocolate", "cake", "biscuits", "sweets", "honey"],
   "fried-foods": [
     "butter",
     "oil",

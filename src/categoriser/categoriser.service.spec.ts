@@ -135,4 +135,10 @@ describe("CategoriserService", () => {
     expect(chickenThighCategory).toBe("fatty-proteins");
     expect(chickenBreastCategory).not.toBe("fatty-proteins");
   });
+
+  it("should return the 'unknown' category when a non-food item is provided", () => {
+    const unknownCategory = service.categorise("lembas bread");
+
+    expect(unknownCategory).toBe("unknwon");
+  });
 });
