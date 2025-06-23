@@ -9,13 +9,13 @@ export class LogService {
   constructor(
     private foodCategoriser: CategoriserService,
     private scorerService: ScorerService,
-    private parserService: TransformerService,
+    private transformerService: TransformerService,
   ) {}
 
   create({ log }: LogDto) {
     const mappedLog = log
       .split(",")
-      .map(this.parserService.parse)
+      .map(this.transformerService.parse)
       .map((log) => ({
         category: this.foodCategoriser.categorise(log.food),
         ...log,

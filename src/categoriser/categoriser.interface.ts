@@ -1,9 +1,9 @@
 export type FoodType =
   | "fruit"
-  | "vegetable"
+  | "vegetables"
   | "lean-meat-and-fish"
   | "nuts-seeds"
-  | "whole-grain"
+  | "whole-grains"
   | "dairy"
   | "refined-grains"
   | "sweets"

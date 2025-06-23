@@ -34,10 +34,10 @@ describe("CategoriserService", () => {
     const kohlrabiCategory = service.categorise("kohlrabi");
     const quinoaCategory = service.categorise("quinoa");
 
-    expect(broccoliCategory).toBe("vegetable");
-    expect(carrotCategory).toBe("vegetable");
-    expect(kohlrabiCategory).toBe("vegetable");
-    expect(quinoaCategory).not.toBe("vegetable");
+    expect(broccoliCategory).toBe("vegetables");
+    expect(carrotCategory).toBe("vegetables");
+    expect(kohlrabiCategory).toBe("vegetables");
+    expect(quinoaCategory).not.toBe("vegetables");
   });
 
   it("should return the 'lean meat and fish' category when lean meat or fish is provided", () => {
@@ -70,10 +70,10 @@ describe("CategoriserService", () => {
     const wholeMealFlourCategory = service.categorise("wholemeal flour");
     const bananaCategory = service.categorise("banana");
 
-    expect(oatsCategory).toBe("whole-grain");
-    expect(quinoaCategory).toBe("whole-grain");
-    expect(wholeMealFlourCategory).toBe("whole-grain");
-    expect(bananaCategory).not.toBe("whole-grain");
+    expect(oatsCategory).toBe("whole-grains");
+    expect(quinoaCategory).toBe("whole-grains");
+    expect(wholeMealFlourCategory).toBe("whole-grains");
+    expect(bananaCategory).not.toBe("whole-grains");
   });
 
   it("should return the 'dairy' category when dairy is provided", () => {

@@ -8,7 +8,7 @@ import {
 // todo: create a function that seperates adjectives or whatever like "low-fat", "brown", etc and categorises based on that
 const FoodCategoryMap: Record<FoodType, string[]> = {
   fruit: ["banana", "apple", "orange", "kiwi"],
-  vegetable: [
+  vegetables: [
     "broccoli",
     "lettuce",
     "tomato",
@@ -33,11 +33,12 @@ const FoodCategoryMap: Record<FoodType, string[]> = {
     "peanut butter",
     "sesame seed",
   ],
-  "whole-grain": [
+  "whole-grains": [
     "brown rice",
     "oats",
     "quinoa",
     "wholemeal pasta",
+    "brown bread",
     "wholemeal flour",
   ],
   dairy: ["milk", "cheese", "yogurt", "kefir", "feta cheese"],

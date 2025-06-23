@@ -27,19 +27,22 @@ export class TransformerService {
     if (isNaN(quantity)) return null;
 
     let unit: Unit | null = null;
+    let startingFoodIndex: number = 1;
     let food: string = "";
 
     if (isUnit(parts[1])) {
       unit = parts[1];
-      food = parts[2];
-    } else {
-      food = parts[1];
+      startingFoodIndex = 2;
+    }
+
+    for (let i = startingFoodIndex; i < parts.length; i++) {
+      food += `${parts[i]} `;
     }
 
     return {
       quantity,
       unit,
-      food,
+      food: food.trim(),
     };
   }
 }
