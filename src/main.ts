@@ -8,6 +8,7 @@ async function bootstrap() {
 
   const allowedOrigins = process.env.FRONTEND_URL.split(",");
 
+  console.log(allowedOrigins)
   app.enableCors({
     origin: allowedOrigins,
     credentials: true,
