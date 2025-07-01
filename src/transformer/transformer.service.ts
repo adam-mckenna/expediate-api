@@ -1,6 +1,15 @@
 import { Injectable } from "@nestjs/common";
 
-import * as z from "zod/v4";
+import {
+  isObjectiveUnit,
+  isSubjectiveUnit,
+  ObjectiveUnit,
+  ObjectiveUnitSchema,
+  SubjectiveUnit,
+  SubjectiveUnitSchema,
+  Unit,
+  UnitType,
+} from "./units.type";
 
 const FillerWords = ["of", "a", "an", "the"];
 const stripFillerWords = (log: string) =>
@@ -9,56 +18,7 @@ const stripFillerWords = (log: string) =>
     .filter((word) => !FillerWords.includes(word.toLowerCase()))
     .join(" ");
 
-const SubjectiveUnitSchema = z.enum([
-  "portion",
-  "portions",
-  "slice",
-  "slices",
-  "cup",
-  "cups",
-  "tbsp",
-  "tbsps",
-  "tsp",
-  "tsps",
-  "glass",
-  "glasses",
-  "bottle",
-  "bottles",
-  "piece",
-  "pieces",
-  "bunch",
-]);
-
-const ObjectiveUnitSchema = z.enum([
-  "g",
-  "gram",
-  "grams",
-  "kg",
-  "kilogram",
-  "kilograms",
-  "ml",
-  "milliliter",
-  "milliliters",
-  "l",
-  "liter",
-  "liters",
-  "oz",
-  "ounce",
-  "ounces",
-  "lb",
-  "pound",
-  "pounds",
-]);
-type SubjectiveUnit = z.infer<typeof SubjectiveUnitSchema>;
-type ObjectiveUnit = z.infer<typeof ObjectiveUnitSchema>;
-type Unit = SubjectiveUnit | ObjectiveUnit | null;
-const isSubjectiveUnit = (value: string): value is SubjectiveUnit =>
-  SubjectiveUnitSchema.safeParse(value).success;
-const isObjectiveUnit = (value: string): value is ObjectiveUnit =>
-  ObjectiveUnitSchema.safeParse(value).success;
-type UnitType = "subjective" | "objective" | null;
-
-type LoggedData = {
+type TransformedLog = {
   unit: Unit;
   unitType: UnitType;
   food: string;
@@ -67,7 +27,7 @@ type LoggedData = {
 
 @Injectable()
 export class TransformerService {
-  parse = (log: string): LoggedData => {
+  parse = (log: string): TransformedLog => {
     // This splits the string into parts which can be individually broken down.
     let parts = stripFillerWords(log).trim().toLowerCase().split(" ");
     let index = 0;
@@ -153,16 +113,19 @@ export class TransformerService {
       }
     }
 
-    if (hasFoundObjectiveUnit) {
-      quantity = parseFloat(hasFoundObjectiveUnit[1]);
-    } else {
-      quantity = parseFloat(value);
-    }
+    quantity = this.getQuantity(
+      hasFoundObjectiveUnit ? hasFoundObjectiveUnit[1] : value,
+      unit,
+    );
 
     return {
       quantity,
       unit,
       unitType,
     };
+  };
+
+  getQuantity = (value, unit) => {
+    return parseFloat(value);
   };
 }

@@ -38,9 +38,10 @@ const FoodCategoryMap: Record<FoodCategory, string[]> = {
     "wholemeal pasta",
     "brown bread",
     "wholemeal flour",
+    "wholemeal toast",
   ],
   dairy: ["milk", "cheese", "yogurt", "kefir", "feta cheese"],
-  "refined-grains": ["white bread", "pasta", "white rice"],
+  "refined-grains": ["white bread", "pasta", "white rice", "toast"],
   sweets: ["chocolate", "cake", "biscuits", "sweets", "honey"],
   "fried-foods": [
     "butter",
