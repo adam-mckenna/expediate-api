@@ -2,19 +2,16 @@ import { NestFactory } from "@nestjs/core";
 import { AppModule } from "./app.module";
 import { ValidationPipe } from "@nestjs/common";
 
-async function bootstrap() {
+const bootstrap = async () => {
   const app = await NestFactory.create(AppModule);
   app.useGlobalPipes(new ValidationPipe());
 
-  const allowedOrigins = process.env.FRONTEND_URL.split(",");
-
-  console.log(allowedOrigins)
   app.enableCors({
-    origin: allowedOrigins,
+    origin: process.env.FRONTEND_URL.split(","),
     credentials: true,
   });
 
   await app.listen(3000);
   console.log(`Server is running on port 3000`);
-}
+};
 bootstrap();

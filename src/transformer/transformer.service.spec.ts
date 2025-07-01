@@ -16,8 +16,16 @@ describe("TransformerService", () => {
     expect(service).toBeDefined();
   });
 
+  it("should strip out filler words if provided", () => {
+    const log = "1 portion of white bread";
+    const { unit, food, quantity } = service.parse(log);
+    expect(food).toBe("white bread");
+    expect(unit).toBe("portion");
+    expect(quantity).toBe(1);
+  });
+
   it("should return a unit if provided", () => {
-    const log = "1 portion white bread";
+    const log = "1 portion of white bread";
     const { unit } = service.parse(log);
     expect(unit).toBe("portion");
   });
@@ -45,5 +53,19 @@ describe("TransformerService", () => {
     const log = "bananas";
     const { quantity } = service.parse(log);
     expect(quantity).toBe(1);
+  });
+
+  it("should give me an objective type based on the unit provided", () => {
+    const log = "100g oats";
+    const { unit, unitType } = service.parse(log);
+    expect(unit).toBe("g");
+    expect(unitType).toBe("objective");
+  });
+
+  it("should give me a subjective type based on the unit provided", () => {
+    const log = "1 portion oats";
+    const { unit, unitType } = service.parse(log);
+    expect(unit).toBe("portion");
+    expect(unitType).toBe("subjective");
   });
 });

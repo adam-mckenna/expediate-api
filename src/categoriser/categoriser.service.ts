@@ -5,7 +5,7 @@ import { FoodCategory } from "src/categoriser/category.type";
 
 // todo: create a function that seperates adjectives or whatever like "low-fat", "brown", etc and categorises based on that
 const FoodCategoryMap: Record<FoodCategory, string[]> = {
-  fruit: ["banana", "apple", "orange", "kiwi"],
+  fruit: ["banana", "apple", "orange", "kiwi", "berry", "berries"],
   vegetables: [
     "broccoli",
     "lettuce",

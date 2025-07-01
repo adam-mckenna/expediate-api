@@ -26,7 +26,7 @@ describe("LogService", () => {
 
   it("should category my breakfast", () => {
     const payload = {
-      log: "oats, peanut butter, 1 banana, 1 portion milk, honey",
+      log: "oats, peanut butter, 1 banana, 1 portion milk, 1g honey",
     };
     const { totalScore, scoredLogs } = service.create(payload);
     expect(scoredLogs.length).toBe(5);
@@ -35,6 +35,7 @@ describe("LogService", () => {
       category: "whole-grains",
       quantity: 1,
       unit: null,
+      unitType: null,
       food: "oats",
       score: 2,
     });
@@ -42,6 +43,7 @@ describe("LogService", () => {
       category: "nuts-seeds",
       quantity: 1,
       unit: null,
+      unitType: null,
       food: "peanut butter",
       score: 2,
     });
@@ -49,6 +51,7 @@ describe("LogService", () => {
       category: "fruit",
       quantity: 1,
       unit: null,
+      unitType: null,
       food: "banana",
       score: 2,
     });
@@ -56,13 +59,15 @@ describe("LogService", () => {
       category: "dairy",
       quantity: 1,
       unit: "portion",
+      unitType: "subjective",
       food: "milk",
       score: 1,
     });
     expect(scoredLogs[4]).toStrictEqual({
       category: "sweets",
       quantity: 1,
-      unit: null,
+      unit: "g",
+      unitType: "objective",
       food: "honey",
       score: -2,
     });
