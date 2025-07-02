@@ -105,20 +105,13 @@ export class TransformerService {
       }
     }
 
-    if (
-      (!hasFoundObjectiveUnit && isSubjectiveUnit(value)) ||
-      isSubjectiveUnit(potentialUnit)
-    ) {
-      const { data, success } = SubjectiveUnitSchema.safeParse(potentialUnit);
-      if (success) {
-        unit = data;
+    if (!hasFoundObjectiveUnit) {
+      if (isSubjectiveUnit(value)) {
+        unit = value;
         unitType = "subjective";
-      } else {
-        const { data, success } = SubjectiveUnitSchema.safeParse(value);
-        if (success) {
-          unit = data;
-          unitType = "subjective";
-        }
+      } else if (isSubjectiveUnit(potentialUnit)) {
+        unit = potentialUnit as Unit;
+        unitType = "subjective";
       }
     }
 

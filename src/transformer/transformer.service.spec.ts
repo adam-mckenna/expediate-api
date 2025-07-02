@@ -51,21 +51,25 @@ describe("TransformerService", () => {
 
   it("should default to 1 if no quantity provided", () => {
     const log = "bananas";
-    const { quantity } = service.parse(log);
+    const { quantity, unit, unitType } = service.parse(log);
     expect(quantity).toBe(1);
+    expect(unit).toBe(null);
+    expect(unitType).toBe(null);
   });
 
   it("should give me an objective type based on the unit provided", () => {
     const log = "100g oats";
-    const { unit, unitType } = service.parse(log);
+    const { unit, unitType, quantity } = service.parse(log);
     expect(unit).toBe("g");
     expect(unitType).toBe("objective");
+    expect(quantity).toBe(100);
   });
 
   it("should give me a subjective type based on the unit provided", () => {
     const log = "1 portion oats";
-    const { unit, unitType } = service.parse(log);
+    const { unit, unitType, quantity } = service.parse(log);
     expect(unit).toBe("portion");
     expect(unitType).toBe("subjective");
+    expect(quantity).toBe(1);
   });
 });

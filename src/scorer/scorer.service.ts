@@ -3,7 +3,10 @@ import { Injectable } from "@nestjs/common";
 import { FoodCategory } from "src/categoriser/category.type";
 import { ServingCategoryMap } from "./serving.map";
 import { isObjectiveUnit, Unit } from "../transformer/units.type";
-import { SubjectiveUnitToGramsCategoryMap, UnitMap } from "../transformer/units.map";
+import {
+  SubjectiveUnitToGramsCategoryMap,
+  UnitMap,
+} from "../transformer/units.map";
 
 export const CategoryScores: Record<FoodCategory, number[]> = {
   fruit: [2, 2, 2, 1, 0, 0],
@@ -19,7 +22,7 @@ export const CategoryScores: Record<FoodCategory, number[]> = {
   unknown: [0],
 };
 
-export type LogItem = { unit: Unit, quantity: number, category: FoodCategory }
+export type LogItem = { unit: Unit; quantity: number; category: FoodCategory };
 
 // Note for the future: could potentially create a ScorerServiceInterface and convert this into
 // a specific "DQSScoringService" - that will give the option to easily plug-and-play different
@@ -35,11 +38,7 @@ export class ScorerService {
 
       let totalServings = quantity;
       if (unit) {
-        const unitInGrams = this.convertUnitToGrams(
-          unit,
-          category,
-          quantity,
-        );
+        const unitInGrams = this.convertUnitToGrams(unit, category, quantity);
         totalServings = Math.floor(unitInGrams / ServingCategoryMap[category]);
         if (totalServings == 0) {
           totalServings = 1;

@@ -194,12 +194,14 @@ describe("ScorerService", () => {
   });
 
   it("should give a score of 4 when 100g of oats is provided", () => {
-    const payload = [{ category: "whole-grains", quantity: 100, unit: "g"}];
+    const payload = [{ category: "whole-grains", quantity: 100, unit: "g" }];
     expect(service.score(payload as Array<LogItem>).totalScore).toBe(4);
-  })
+  });
 
   it("should give a score of 4 when 2 servings of oats is provided", () => {
-    const payload = [{ category: "whole-grains", quantity: 2, unit: "serving"}];
+    const payload = [
+      { category: "whole-grains", quantity: 2, unit: "serving" },
+    ];
     expect(service.score(payload as Array<LogItem>).totalScore).toBe(4);
-  })
+  });
 });

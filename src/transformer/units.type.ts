@@ -19,7 +19,7 @@ export const SubjectiveUnitSchema = z.enum([
   "pieces",
   "bunch",
   "serving",
-  "servings"
+  "servings",
 ]);
 
 export const ObjectiveUnitSchema = z.enum([
@@ -46,11 +46,11 @@ export const ObjectiveUnitSchema = z.enum([
 export type SubjectiveUnit = z.infer<typeof SubjectiveUnitSchema>;
 export type ObjectiveUnit = z.infer<typeof ObjectiveUnitSchema>;
 
+export type Unit = SubjectiveUnit | ObjectiveUnit | null;
+export type UnitType = "subjective" | "objective" | null;
+
 export const isSubjectiveUnit = (value: string): value is SubjectiveUnit =>
   SubjectiveUnitSchema.safeParse(value).success;
 
 export const isObjectiveUnit = (value: string): value is ObjectiveUnit =>
   ObjectiveUnitSchema.safeParse(value).success;
-
-export type Unit = SubjectiveUnit | ObjectiveUnit | null;
-export type UnitType = "subjective" | "objective" | null;

@@ -32,7 +32,7 @@ export const SubjectiveUnitToGramsCategoryMap: Record<
     pieces: 25,
     bunch: 100,
     serving: 50,
-    servings: 50
+    servings: 50,
   },
   vegetables: {
     portion: 50,
@@ -53,7 +53,7 @@ export const SubjectiveUnitToGramsCategoryMap: Record<
     pieces: 25,
     bunch: 100,
     serving: 50,
-    servings: 50
+    servings: 50,
   },
   "lean-meat-and-fish": {
     portion: 50,
@@ -74,7 +74,7 @@ export const SubjectiveUnitToGramsCategoryMap: Record<
     pieces: 25,
     bunch: 100,
     serving: 50,
-    servings: 50
+    servings: 50,
   },
   "nuts-seeds": {
     portion: 50,
@@ -95,7 +95,7 @@ export const SubjectiveUnitToGramsCategoryMap: Record<
     pieces: 25,
     bunch: 100,
     serving: 50,
-    servings: 50
+    servings: 50,
   },
   "whole-grains": {
     portion: 50,
@@ -116,7 +116,7 @@ export const SubjectiveUnitToGramsCategoryMap: Record<
     pieces: 25,
     bunch: 100,
     serving: 50,
-    servings: 50
+    servings: 50,
   },
   dairy: {
     portion: 50,
@@ -137,7 +137,7 @@ export const SubjectiveUnitToGramsCategoryMap: Record<
     pieces: 25,
     bunch: 100,
     serving: 50,
-    servings: 50
+    servings: 50,
   },
   "refined-grains": {
     portion: 50,
@@ -158,7 +158,7 @@ export const SubjectiveUnitToGramsCategoryMap: Record<
     pieces: 25,
     bunch: 100,
     serving: 50,
-    servings: 50
+    servings: 50,
   },
   sweets: {
     portion: 50,
@@ -179,7 +179,7 @@ export const SubjectiveUnitToGramsCategoryMap: Record<
     pieces: 25,
     bunch: 100,
     serving: 50,
-    servings: 50
+    servings: 50,
   },
   "fried-foods": {
     portion: 50,
@@ -200,7 +200,7 @@ export const SubjectiveUnitToGramsCategoryMap: Record<
     pieces: 25,
     bunch: 100,
     serving: 50,
-    servings: 50
+    servings: 50,
   },
   "fatty-proteins": {
     portion: 50,
@@ -221,7 +221,7 @@ export const SubjectiveUnitToGramsCategoryMap: Record<
     pieces: 25,
     bunch: 100,
     serving: 50,
-    servings: 50
+    servings: 50,
   },
   unknown: {
     portion: 50,
@@ -242,6 +242,6 @@ export const SubjectiveUnitToGramsCategoryMap: Record<
     pieces: 25,
     bunch: 100,
     serving: 50,
-    servings: 50
+    servings: 50,
   },
 };
