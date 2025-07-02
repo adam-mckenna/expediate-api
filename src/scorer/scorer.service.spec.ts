@@ -16,12 +16,12 @@ describe("ScorerService", () => {
     expect(service).toBeDefined();
   });
 
-  it("should give a total score of '11' with the following input", () => {
+  it("should give a total score of '10' with the following input", () => {
     const payload = [
       { category: "fruit", quantity: 4, unit: null, food: "bananas" },
       {
         category: "fatty-proteins",
-        quantity: 2,
+        quantity: 3,
         unit: "portion",
         food: "sausages",
       },
@@ -45,7 +45,7 @@ describe("ScorerService", () => {
         food: "white bread",
       },
     ];
-    expect(service.score(payload as Array<LogItem>).totalScore).toBe(11);
+    expect(service.score(payload as Array<LogItem>).totalScore).toBe(10);
   });
 
   it("should give a score of 2 when 1 portion of fruit is provided", () => {

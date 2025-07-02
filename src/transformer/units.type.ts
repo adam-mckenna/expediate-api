@@ -20,6 +20,8 @@ export const SubjectiveUnitSchema = z.enum([
   "bunch",
   "serving",
   "servings",
+  "packet",
+  "packets",
 ]);
 
 export const ObjectiveUnitSchema = z.enum([
