@@ -12,11 +12,6 @@ import {
 } from "./units.type";
 
 const FillerWords = ["of", "a", "an", "the"];
-const stripFillerWords = (log: string) =>
-  log
-    .split(" ")
-    .filter((word) => !FillerWords.includes(word.toLowerCase()))
-    .join(" ");
 
 type TransformedLog = {
   unit: Unit;
@@ -25,11 +20,19 @@ type TransformedLog = {
   quantity: number;
 };
 
+// The transformer service takes a given logged food string and breaks the string down
+// into tangible data, such as the food item, quantity, unit and unit type.
+// The service expects a string in a generally consistent format:
+//
+// Examples:
+// 1: "100g oats"
+// 2: "4 portions of cake"
+// 3: "1ltrs of wine"
 @Injectable()
 export class TransformerService {
   parse = (log: string): TransformedLog => {
     // This splits the string into parts which can be individually broken down.
-    let parts = stripFillerWords(log).trim().toLowerCase().split(" ");
+    let parts = this.stripFillerWords(log).trim().toLowerCase().split(" ");
     let index = 0;
 
     // The quantity is generally provided first.
@@ -66,6 +69,12 @@ export class TransformerService {
       food: food.trim(),
     };
   };
+
+  stripFillerWords = (log: string) =>
+    log
+      .split(" ")
+      .filter((word) => !FillerWords.includes(word.toLowerCase()))
+      .join(" ");
 
   getQuantityAndUnit = (
     value: string,
@@ -113,9 +122,8 @@ export class TransformerService {
       }
     }
 
-    quantity = this.getQuantity(
+    quantity = parseFloat(
       hasFoundObjectiveUnit ? hasFoundObjectiveUnit[1] : value,
-      unit,
     );
 
     return {
@@ -123,9 +131,5 @@ export class TransformerService {
       unit,
       unitType,
     };
-  };
-
-  getQuantity = (value, unit) => {
-    return parseFloat(value);
   };
 }
