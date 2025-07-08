@@ -1,5 +1,4 @@
 import { FoodCategory } from "src/categoriser/category.type";
-import { SubjectiveUnit } from "src/transformer/units.type";
 
 // Maps out how many grams are in any given unit
 export const UnitMap: Record<string, number> = {
@@ -9,8 +8,9 @@ export const UnitMap: Record<string, number> = {
 };
 
 // The base grams of each food item.
-// For instance, 100g of "fruit" counts as 1 serving. 60g peanuts counts as 2 servings of "nuts-seeds", etc.
-export const BaseSubjectiveCategoryGramsMap: Record<FoodCategory, number> = {
+// For instance: 100g of "fruit" counts as 1 serving, 
+// 60g peanuts counts as 2 servings of "nuts-seeds", etc.
+export const CategoryToGramsMap: Record<FoodCategory, number> = {
   fruit: 100,
   vegetables: 100,
   "lean-meat-and-fish": 80,
@@ -18,22 +18,43 @@ export const BaseSubjectiveCategoryGramsMap: Record<FoodCategory, number> = {
   "whole-grains": 50,
   dairy: 40,
   "refined-grains": 50,
-  sweets: 30,
+  sweets: 50,
   "fried-foods": 50,
   "fatty-proteins": 100,
   unknown: 50,
 };
 
-// Overrides for specific foods.
-// For instance, "potato" is a higher calorie vegetable, so fewer grams = more portions.
-export const SubjectiveFoodToGramsMap: Record<string, number> = {
+// Override CategoryToGramsMap for specific foods. How many grams are in 1 portion.
+// For instance: "potato" is a higher calorie vegetable, so fewer grams = more portions.
+export const FoodToGramsMap: Record<string, number> = {
   sausage: 50,
   sausages: 50,
-  potato: 80,
-  potatoes: 80,
+  potato: 50,
+  potatoes: 50,
+  // This means, for instance, that a biscuit = 1/2 a serving.
+  biscuit: CategoryToGramsMap["sweets"] / 2,
+  biscuits: CategoryToGramsMap["sweets"] / 2,
 };
 
-// Overrides for various subjective units. It will default to the BaseSubjectiveCategoryGramsMap if none is provided.
+// Default subjective serving sizes for each category.
+// If a subjective category (e.g. "scoop") does not have a specific measurement 
+// (defined in SubjectiveUnitToGramsCategoryMap) then it falls back to these values.
+export const SubjectiveUnitFallbackCategoryMap: Record<FoodCategory, number> = {
+  fruit: 50,
+  vegetables: 50,
+  "lean-meat-and-fish": 50,
+  "nuts-seeds": 50,
+  "whole-grains": 50,
+  dairy: 50,
+  "refined-grains": 50,
+  sweets: 50,
+  "fried-foods": 50,
+  "fatty-proteins": 50,
+  unknown: 50,
+};
+
+// Overrides for various subjective units. It will default 
+// to the BaseSubjectiveCategoryGramsMap if none is provided.
 export const SubjectiveUnitToGramsCategoryMap: Record<
   FoodCategory,
   Record<string, number>

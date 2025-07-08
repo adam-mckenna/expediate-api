@@ -3,13 +3,13 @@ import { Injectable } from "@nestjs/common";
 import { FoodCategory } from "src/categoriser/category.type";
 import { isObjectiveUnit, Unit } from "../transformer/units.type";
 import {
-  BaseSubjectiveCategoryGramsMap,
-  SubjectiveFoodToGramsMap,
+  FoodToGramsMap,
+  CategoryToGramsMap,
   SubjectiveUnitToGramsCategoryMap,
   UnitMap,
+  SubjectiveUnitFallbackCategoryMap,
 } from "../transformer/units.map";
 
-import { ServingCategoryMap } from "./serving.map";
 import { CategoryScores } from "./scores";
 
 export type LogItem = {
@@ -38,9 +38,9 @@ export class ScorerService {
 
       const servings = this.calculateTotalServings(
         food,
-        unit,
         quantity,
         category,
+        unit,
       );
       const scoreArray = CategoryScores[category];
 
@@ -63,20 +63,17 @@ export class ScorerService {
 
   calculateTotalServings = (
     food: string,
-    unit: Unit,
     quantity: number,
     category: FoodCategory,
+    unit?: Unit,
   ) => {
-    let servings = quantity;
-    if (unit) {
-      const unitInGrams = this.convertUnitToGrams(
-        food,
-        unit,
-        category,
-        quantity,
-      );
-      servings = Math.floor(unitInGrams / ServingCategoryMap[category]);
-    }
+    const unitInGrams = this.convertUnitToGrams(
+      food,
+      unit || "serving",
+      category,
+      quantity,
+    );
+    const servings = Math.floor(unitInGrams / CategoryToGramsMap[category]);
     return servings || 1;
   };
 
@@ -89,19 +86,16 @@ export class ScorerService {
     // Default to 1g
     let unitMappedToGrams = 1;
 
-    if (isObjectiveUnit(unit)) {
-      if (unit !== "g") {
-        unitMappedToGrams = UnitMap[unit];
-      }
+    if (isObjectiveUnit(unit) && unit !== "g") {
+      unitMappedToGrams = UnitMap[unit];
     } else {
-      const foodToGrams = SubjectiveFoodToGramsMap[food];
-      if (!foodToGrams) {
-        unitMappedToGrams =
-          SubjectiveUnitToGramsCategoryMap[category][unit] ||
-          BaseSubjectiveCategoryGramsMap[category];
-      } else {
-        unitMappedToGrams = foodToGrams;
-      }
+      unitMappedToGrams =
+        // First, check if the subjective unit "override" exists for the specific food item.
+        FoodToGramsMap[food] ||
+        // If no override exists, check the category overrides for the specific unit.
+        SubjectiveUnitToGramsCategoryMap[category][unit] ||
+        // If that doesn't exist, fallback to category defaults.
+        SubjectiveUnitFallbackCategoryMap[category];
     }
 
     return unitMappedToGrams * quantity;

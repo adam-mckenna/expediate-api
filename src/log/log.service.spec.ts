@@ -24,7 +24,15 @@ describe("LogService", () => {
     expect(service).toBeDefined();
   });
 
-  it("should category my breakfast", () => {
+  it("should give a lot of negative points for a junk food", () => {
+    const payload = {
+      log: "2 scoops ice cream, 4 biscuits, 1 piece cake",
+    };
+    const { totalScore } = service.create(payload);
+    expect(totalScore).toBe(-10);
+  });
+
+  it("should correctly score my breakfast", () => {
     const payload = {
       log: "oats, peanut butter, 1 banana, 1 portion milk, 15g honey",
     };
