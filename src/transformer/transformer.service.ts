@@ -6,7 +6,6 @@ import {
   ObjectiveUnit,
   ObjectiveUnitSchema,
   SubjectiveUnit,
-  SubjectiveUnitSchema,
   Unit,
   UnitType,
 } from "./units.type";

@@ -32,6 +32,13 @@ describe("LogService", () => {
     expect(totalScore).toBe(-10);
   });
 
+  it("should correct log a random day of eating", () => {
+    const payload = {
+      log: "1 serving oats, 15g honey, 25g peanut butter, banana, apple, 1 black coffee, 50g wholemeal pasta, tomato sauce, broccoli, red pepper, lettuce, 30g gorgonzola, 100g gnocchi, leeks, 50g dark chocolate",
+    };
+    // todo: implement test
+  });
+
   it("should correctly score my breakfast", () => {
     const payload = {
       log: "oats, peanut butter, 1 banana, 1 portion milk, 15g honey",

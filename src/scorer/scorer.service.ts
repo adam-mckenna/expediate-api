@@ -73,6 +73,7 @@ export class ScorerService {
       category,
       quantity,
     );
+    console.log(food, unitInGrams);
     const servings = Math.floor(unitInGrams / CategoryToGramsMap[category]);
     return servings || 1;
   };
@@ -86,7 +87,7 @@ export class ScorerService {
     // Default to 1g
     let unitMappedToGrams = 1;
 
-    if (isObjectiveUnit(unit) && unit !== "g") {
+    if (isObjectiveUnit(unit)) {
       unitMappedToGrams = UnitMap[unit];
     } else {
       unitMappedToGrams =
