@@ -5,6 +5,7 @@ import { FoodCategory } from "src/categoriser/category.type";
 import { FoodCategoryMap, singularise } from "src/categoriser/foods.map";
 
 const FoodCategoriser = (food: string): FoodCategory => {
+  console.log(FoodCategoryMap["whole-grains"]);
   for (const [category, foods] of Object.entries(FoodCategoryMap)) {
     food = singularise(food);
     if (foods.includes(food)) {
