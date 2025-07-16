@@ -73,9 +73,10 @@ export class ScorerService {
       category,
       quantity,
     );
-    console.log(food, unitInGrams);
-    const servings = Math.floor(unitInGrams / CategoryToGramsMap[category]);
-    return servings || 1;
+    // Always round UP to the nearest serving - this is a critical detail.
+    // It means that if 1.5 of serving is provided, it will count as 2 in score.
+    // This choice keeps things simple.
+    return Math.ceil(unitInGrams / CategoryToGramsMap[category]) || 1;
   };
 
   convertUnitToGrams = (

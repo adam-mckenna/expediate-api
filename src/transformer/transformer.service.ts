@@ -65,7 +65,11 @@ export class TransformerService {
       quantity,
       unit,
       unitType,
-      food: food.trim(),
+      // Replace special characters (especially dashes) with spaces for easier comparison
+      food: food
+        .trim()
+        .replace(/[^a-zA-Z0-9 ]+/g, " ")
+        .replace(/\s+/g, " "),
     };
   };
 

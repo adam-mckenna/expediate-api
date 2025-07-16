@@ -1,5 +1,7 @@
 import { Test, TestingModule } from "@nestjs/testing";
+
 import { CategoriserService } from "./categoriser.service";
+import { FoodCategory } from "./category.type";
 
 describe("CategoriserService", () => {
   let service: CategoriserService;
@@ -140,5 +142,87 @@ describe("CategoriserService", () => {
     const unknownCategory = service.categorise("lembas bread");
 
     expect(unknownCategory).toBe("unknown");
+  });
+
+  it("should categorise 'whole' and 'refined' grains appropriately", () => {
+    const wholeGrains: Array<FoodCategory> = [
+      service.categorise("wholemeal fusilli"),
+      service.categorise("whole meal pasta"),
+      service.categorise("wholegrain tortellini"),
+      service.categorise("whole grain rice"),
+    ];
+    const refinedGrains: Array<FoodCategory> = [
+      service.categorise("fusilli"),
+      service.categorise("regular pasta"),
+      service.categorise("refined tortellini"),
+      service.categorise("white rice"),
+    ];
+
+    wholeGrains.forEach((category) => {
+      expect(category).toBe("whole-grains");
+    });
+    refinedGrains.forEach((category) => {
+      expect(category).toBe("refined-grains");
+    });
+  });
+
+  it("should categorise 'lean' and 'fatty' meats appropriately", () => {
+    const fattyMeats: Array<FoodCategory> = [
+      service.categorise("fatty chicken"),
+      service.categorise("chicken thigh"),
+      service.categorise("sausage"),
+      service.categorise("full fat turkey"),
+    ];
+    const leanMeats: Array<FoodCategory> = [
+      service.categorise("low fat chicken"),
+      service.categorise("chicken breast"),
+      service.categorise("low fat sausage"),
+      service.categorise("lean turkey"),
+    ];
+
+    fattyMeats.forEach((category) => {
+      expect(category).toBe("fatty-proteins");
+    });
+    leanMeats.forEach((category) => {
+      expect(category).toBe("lean-meat-and-fish");
+    });
+  });
+
+  it("should categorise cheeses with/without proceeding 'cheese' descriptor", () => {
+    const cheeseCategories = [
+      service.categorise("feta"),
+      service.categorise("feta cheese"),
+      service.categorise("stilton"),
+      service.categorise("stilton cheese"),
+      service.categorise("mozzarella"),
+      service.categorise("mozzarella cheese"),
+      service.categorise("cheddar"),
+      service.categorise("cheddar cheese"),
+      service.categorise("paneer"),
+      service.categorise("paneer cheese"),
+    ];
+
+    cheeseCategories.forEach((category) => {
+      expect(category).toBe("dairy");
+    });
+  });
+
+  it("should categorise both plural and singular foods", () => {
+    const categories = [
+      service.categorise("berry"),
+      service.categorise("berries"),
+      service.categorise("cherry"),
+      service.categorise("cherries"),
+      service.categorise("noodle"),
+      service.categorise("noodles"),
+      service.categorise("potato"),
+      service.categorise("potatoes"),
+      service.categorise("almond"),
+      service.categorise("almonds"),
+    ];
+
+    categories.forEach((category) => {
+      expect(category).not.toBe("unknown");
+    });
   });
 });

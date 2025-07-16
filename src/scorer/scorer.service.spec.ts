@@ -18,26 +18,32 @@ describe("ScorerService", () => {
 
   it("should give a total score of '10' with the following input", () => {
     const payload = [
+      // score = 7
       { category: "fruit", quantity: 4, unit: null, food: "bananas" },
+      // score = -2 (2 sausages = 1 portion)
       {
         category: "fatty-proteins",
         quantity: 3,
         unit: "portion",
         food: "sausages",
       },
+      // score = 0
       { category: "fruit", quantity: 1, unit: null, food: "apple" },
+      // score = 4
       {
         category: "lean-meat-and-fish",
         quantity: 2,
         unit: "portion",
         food: "tuna",
       },
+      // score = 4
       {
         category: "whole-grains",
         quantity: 2,
         unit: "portion",
         food: "brown rice",
       },
+      // score = -2
       {
         category: "refined-grains",
         quantity: 2,
@@ -45,7 +51,7 @@ describe("ScorerService", () => {
         food: "white bread",
       },
     ];
-    expect(service.score(payload as Array<LogItem>).totalScore).toBe(10);
+    expect(service.score(payload as Array<LogItem>).totalScore).toBe(11);
   });
 
   it("should give a score of 2 when 1 portion of fruit is provided", () => {
