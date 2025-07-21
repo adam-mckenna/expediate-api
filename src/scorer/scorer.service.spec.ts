@@ -1,5 +1,6 @@
 import { Test, TestingModule } from "@nestjs/testing";
-import { LogItem, ScorerService } from "./scorer.service";
+import { ScorerService } from "./scorer.service";
+import { LogItem } from "./scorer.interface";
 
 describe("ScorerService", () => {
   let service: ScorerService;

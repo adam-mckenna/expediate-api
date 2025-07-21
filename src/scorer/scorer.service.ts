@@ -11,19 +11,13 @@ import {
 } from "../transformer/units.map";
 
 import { CategoryScores } from "./scores";
-
-export type LogItem = {
-  food: string;
-  unit: Unit;
-  quantity: number;
-  category: FoodCategory;
-};
+import { LogItem, ScorerInterface } from "src/scorer/scorer.interface";
 
 // Note for the future: could potentially create a ScorerServiceInterface and convert this into
 // a specific "DQSScoringService" - that will give the option to easily plug-and-play different
 // food scoring systems if desired. Same for DQSCategoriserService, etc.
 @Injectable()
-export class ScorerService {
+export class ScorerService implements ScorerInterface {
   score(log: Array<LogItem>) {
     let categoryCount: Record<string, number> = {};
     let totalScore = 0;

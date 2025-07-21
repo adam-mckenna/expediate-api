@@ -225,4 +225,17 @@ describe("CategoriserService", () => {
       expect(category).not.toBe("unknown");
     });
   });
+
+  it("should categorise vegetable uses, such as soup", () => {
+    const categories = [
+      service.categorise("tomato sauce"),
+      service.categorise("beetroot soup"),
+      service.categorise("carrot soup"),
+      service.categorise("kohlrabi sauce"),
+    ];
+
+    categories.forEach((category) => {
+      expect(category).toBe("vegetables");
+    });
+  });
 });
