@@ -16,7 +16,7 @@ export class CategoriserController {
       "An object containing all food categories, which themselves contain an array of their food items",
     type: Object,
   })
-  allCategorises() {
+  allCategories() {
     return FoodCategoryMap;
   }
 

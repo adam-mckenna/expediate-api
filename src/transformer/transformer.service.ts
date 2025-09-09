@@ -26,7 +26,7 @@ type TransformedLog = {
 // Examples:
 // 1: "100g oats"
 // 2: "4 portions of cake"
-// 3: "1ltrs of wine"
+// 3: "1 ltrs of wine"
 @Injectable()
 export class TransformerService {
   parse = (log: string): TransformedLog => {

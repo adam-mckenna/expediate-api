@@ -43,8 +43,8 @@ describe("TransformerService", () => {
     expect(quantity).toBe(1);
   });
 
-  it("should return a quanity", () => {
-    const log = "20 lembas breadrolls";
+  it("should return a quantity", () => {
+    const log = "20 lembas bread-rolls";
     const { quantity } = service.parse(log);
     expect(quantity).toBe(20);
   });
