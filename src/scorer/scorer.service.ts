@@ -19,10 +19,16 @@ import { LogItem, ScorerInterface } from "src/scorer/scorer.interface";
 @Injectable()
 export class ScorerService implements ScorerInterface {
   score(log: Array<LogItem>) {
-    let categoryCount: Record<string, number> = {};
+    let categoryLogs: Record<string, { score: number, logs: Array<{
+      score: number;
+      food: string;
+      unit: Unit;
+      quantity: number;
+      category: FoodCategory;
+    }>}> = {};
     let totalScore = 0;
 
-    const scoredLogs = log.map((entry) => {
+    log.forEach((entry) => {
       const { food, category, quantity, unit } = entry;
 
       // If the category doesn't exist, do not give the item a score.
@@ -40,18 +46,24 @@ export class ScorerService implements ScorerInterface {
 
       let score = 0;
       for (let i = 0; i < servings; i++) {
-        const count = categoryCount[category] ?? 0;
-        categoryCount[category] = count + 1;
+        if (!categoryLogs[category]) {
+          categoryLogs[category] = {
+            score: 0,
+            logs: []
+          }
+        }
+        const count = categoryLogs[category].score;
+        categoryLogs[category].score = count + 1;
         score += scoreArray[Math.min(count, scoreArray.length - 1)];
       }
-      totalScore += score;
 
-      return { ...entry, score };
+      totalScore += score;
+      categoryLogs[category].logs.push({ score, ...entry }); 
     });
 
     return {
       totalScore,
-      scoredLogs,
+      logs: categoryLogs,
     };
   }
 

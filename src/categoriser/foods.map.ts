@@ -136,7 +136,7 @@ const Cheeses = [
 
 // A list of meats that could be either fatty or lean, depending on how they are
 //  described (e.g. low fat, fatty, reduced-fat, etc.)
-const AmbigiousMeats = [
+const AmbiguousMeats = [
   "beef",
   "pork",
   "chicken",
@@ -186,6 +186,7 @@ const LeanMeatAdjectives = [
 ];
 
 const Vegetables = [
+  "salad",
   "artichoke",
   "arugula",
   "asparagus",
@@ -391,7 +392,7 @@ export const FoodCategoryMap: Record<FoodCategory, string[]> = {
     "cobia",
     "amberjack",
     ...[
-      ...AmbigiousMeats.map((meat) =>
+      ...AmbiguousMeats.map((meat) =>
         LeanMeatAdjectives.map((adjective) => `${adjective} ${meat}`),
       ),
     ].flat(),
@@ -412,11 +413,12 @@ export const FoodCategoryMap: Record<FoodCategory, string[]> = {
     "chorizo",
     "corned beef",
     "pâté",
+    "pate",
     "sausage",
     "chicken thigh",
     "chicken drumstick",
     ...[
-      ...AmbigiousMeats.map((meat) =>
+      ...AmbiguousMeats.map((meat) =>
         FattyProteinAdjectives.map((adjective) => `${adjective} ${meat}`),
       ),
     ].flat(),
@@ -537,6 +539,7 @@ export const FoodCategoryMap: Record<FoodCategory, string[]> = {
     "fritter",
     "fried fish",
     "onion ring",
+    "fry",
     "french fry",
     "potato chip",
     "doughnut",

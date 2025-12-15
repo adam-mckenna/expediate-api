@@ -3,13 +3,16 @@ import { Unit } from "src/transformer/units.type";
 
 export type ScoredResults = {
   totalScore: number;
-  scoredLogs: Array<{
-    score: number;
-    food: string;
-    unit: Unit;
-    quantity: number;
-    category: FoodCategory;
-  }>;
+  logs: Record<string, {
+    score: number,
+    logs: Array<{
+      score: number;
+      food: string;
+      unit: Unit;
+      quantity: number;
+      category: FoodCategory;
+    }>;
+  }> 
 };
 
 export type LogItem = {
