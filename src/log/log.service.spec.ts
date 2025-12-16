@@ -40,51 +40,94 @@ describe("LogService", () => {
   });
 
   it("should correctly score my breakfast", () => {
+    // categories:
+    // whole grains: oats
+    // nuts and seeds: peanut butter
+    // fruits: banana
+    // dairy: milk
     const payload = {
-      log: "oats, peanut butter, 1 banana, 1 portion milk, 15g honey",
+      log: "oats, tahini, peanut butter, 1 banana, 1 portion milk, 15g honey",
     };
-    const { totalScore, scoredLogs } = service.create(payload);
-    expect(scoredLogs.length).toBe(5);
-    expect(totalScore).toBe(5);
-    expect(scoredLogs[0]).toStrictEqual({
-      category: "whole-grains",
-      quantity: 1,
-      unit: null,
-      unitType: null,
-      food: "oats",
+    const { totalScore, logs } = service.create(payload);
+    expect(totalScore).toBe(7);
+    expect(logs["whole-grains"]).toStrictEqual({
       score: 2,
+      logs: [
+        {
+          category: "whole-grains",
+          quantity: 1,
+          servings: 1,
+          unit: null,
+          unitType: null,
+          food: "oats",
+          score: 2,
+        },
+      ],
     });
-    expect(scoredLogs[1]).toStrictEqual({
-      category: "nuts-seeds",
-      quantity: 1,
-      unit: null,
-      unitType: null,
-      food: "peanut butter",
+    expect(logs["nuts-seeds"]).toStrictEqual({
+      score: 4,
+      logs: [
+        {
+          category: "nuts-seeds",
+          quantity: 1,
+          servings: 1,
+          unit: null,
+          unitType: null,
+          food: "tahini",
+          score: 2,
+        },
+        {
+          category: "nuts-seeds",
+          quantity: 1,
+          servings: 1,
+          unit: null,
+          unitType: null,
+          food: "peanut butter",
+          score: 2,
+        },
+      ],
+    });
+    expect(logs["fruit"]).toStrictEqual({
       score: 2,
+      logs: [
+        {
+          category: "fruit",
+          quantity: 1,
+          servings: 1,
+          unit: null,
+          unitType: null,
+          food: "banana",
+          score: 2,
+        },
+      ],
     });
-    expect(scoredLogs[2]).toStrictEqual({
-      category: "fruit",
-      quantity: 1,
-      unit: null,
-      unitType: null,
-      food: "banana",
-      score: 2,
-    });
-    expect(scoredLogs[3]).toStrictEqual({
-      category: "dairy",
-      quantity: 1,
-      unit: "portion",
-      unitType: "subjective",
-      food: "milk",
+    expect(logs["dairy"]).toStrictEqual({
       score: 1,
+      logs: [
+        {
+          category: "dairy",
+          quantity: 1,
+          servings: 1,
+          unit: "portion",
+          unitType: "subjective",
+          food: "milk",
+          score: 1,
+        },
+      ],
     });
-    expect(scoredLogs[4]).toStrictEqual({
-      category: "sweets",
-      quantity: 15,
-      unit: "g",
-      unitType: "objective",
-      food: "honey",
+    expect(logs["sweets"]).toStrictEqual({
       score: -2,
+      logs: [
+        {
+          category: "sweets",
+          quantity: 15,
+          servings: 1,
+          unit: "g",
+          unitType: "objective",
+          food: "honey",
+          score: -2,
+        },
+      ],
     });
   });
 });

@@ -17,11 +17,11 @@ describe("ScorerService", () => {
     expect(service).toBeDefined();
   });
 
-  it("should give a total score of '10' with the following input", () => {
+  it("should give a total score of '11' with the following input", () => {
     const payload = [
       // score = 7
       { category: "fruit", quantity: 4, unit: null, food: "bananas" },
-      // score = -2 (2 sausages = 1 portion)
+      // score = -2 (3 sausages = 1.5 portion)
       {
         category: "fatty-proteins",
         quantity: 3,
