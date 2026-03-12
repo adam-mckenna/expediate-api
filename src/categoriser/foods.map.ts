@@ -55,6 +55,7 @@ export const Grains = [
   "couscous",
   "farina",
   "maida",
+  "toast"
 ];
 // We combine the grain with the potential adjectives to dynamically build a list of options.
 export const WholeAdjectives = [
@@ -96,6 +97,45 @@ export const RefinedAdjectives = [
   "regular",
   "normal",
 ];
+
+// This list means we can combine with the word "fried" at the end.
+export const FriedAdjectives = [
+  "fried",
+  "deep fried",
+];
+export const FriedFoods = [
+  "tempura",
+  "fritter",
+  "onion ring",
+  "fry",
+  "french fry",
+  "potato chip",
+  "doughnut",
+  "samosa",
+  "spring roll",
+  "churro",
+  "beignet",
+  "crisp",
+  "chip",
+  "pakora",
+  "fish and chip",
+  "corn dog",
+  "zeppole",
+  "arancini",
+  "falafel",
+]
+const PotentiallyFriedFoods = [
+  "chicken",
+  "fish",
+  "shrimp",
+  "calamari",
+  "rice",
+  "tofu",
+  "egg roll",
+  "plantain",
+  "green tomato",
+  "wonton",
+]
 
 // This list means we can combine with the word "cheese" at the end.
 const Cheeses = [
@@ -424,6 +464,8 @@ export const FoodCategoryMap: Record<FoodCategory, string[]> = {
     ].flat(),
   ],
   "nuts-seeds": [
+    "nut",
+    "seed",
     "almond",
     "cashew",
     "walnut",
@@ -485,6 +527,8 @@ export const FoodCategoryMap: Record<FoodCategory, string[]> = {
     "milk",
     "cheese",
     "yogurt",
+    "yoghurt",
+    "yoghourt",
     "curd",
     "kefir",
     "whey",
@@ -532,37 +576,21 @@ export const FoodCategoryMap: Record<FoodCategory, string[]> = {
     "crepe",
     "honey",
     "biscuit",
+    "mars bar",
+    "twix",
+    "snickers",
+    "kit kat",
+    "milky way",
+    "3 musketeers",
+    "reeses",
+    "twirl",
+    "twirl bar",
   ],
   "fried-foods": [
-    "fried chicken",
-    "tempura",
-    "fritter",
-    "fried fish",
-    "onion ring",
-    "fry",
-    "french fry",
-    "potato chip",
-    "doughnut",
-    "samosa",
-    "spring roll",
-    "egg roll",
-    "churro",
-    "beignet",
-    "crisp",
-    "chips",
-    "pakora",
-    "fish and chip",
-    "corn dog",
-    "zeppole",
-    "arancini",
-    "falafel",
-    "fried shrimp",
-    "fried calamari",
-    "fried rice",
-    "fried tofu",
-    "fried plantain",
-    "fried green tomato",
-    "fried wonton",
+    ...FriedFoods,
+    ...PotentiallyFriedFoods.map((food) =>
+      FriedAdjectives.map((adjective) => `${adjective} ${food}`),
+    ).flat(),
   ],
   unknown: [],
 };
