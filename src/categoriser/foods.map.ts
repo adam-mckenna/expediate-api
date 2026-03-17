@@ -98,45 +98,6 @@ export const RefinedAdjectives = [
   "normal",
 ];
 
-// This list means we can combine with the word "fried" at the end.
-export const FriedAdjectives = [
-  "fried",
-  "deep fried",
-];
-export const FriedFoods = [
-  "tempura",
-  "fritter",
-  "onion ring",
-  "fry",
-  "french fry",
-  "potato chip",
-  "doughnut",
-  "samosa",
-  "spring roll",
-  "churro",
-  "beignet",
-  "crisp",
-  "chip",
-  "pakora",
-  "fish and chip",
-  "corn dog",
-  "zeppole",
-  "arancini",
-  "falafel",
-]
-const PotentiallyFriedFoods = [
-  "chicken",
-  "fish",
-  "shrimp",
-  "calamari",
-  "rice",
-  "tofu",
-  "egg roll",
-  "plantain",
-  "green tomato",
-  "wonton",
-]
-
 // This list means we can combine with the word "cheese" at the end.
 const Cheeses = [
   "paneer",
@@ -212,6 +173,32 @@ const FattyProteinAdjectives = [
   "fullfat",
   "rich in saturated fat",
 ];
+const FattyProteins = [
+  "steak",
+  "ribeye",
+  "brisket",
+  "short ribs",
+  "pork belly",
+  "bacon",
+  "spare ribs",
+  "lamb shoulder",
+  "duck leg",
+  "goose breast",
+  "salami",
+  "pepperoni",
+  "chorizo",
+  "corned beef",
+  "pâté",
+  "pate",
+  "sausage",
+  "chicken thigh",
+  "chicken drumstick",
+  ...[
+    ...AmbiguousMeats.map((meat) =>
+      FattyProteinAdjectives.map((adjective) => `${adjective} ${meat}`),
+    ),
+  ].flat(),
+]
 const LeanMeatAdjectives = [
   "lean",
   "extra lean",
@@ -300,6 +287,47 @@ const Vegetables = [
   "zucchini",
 ];
 const VegetableUses = ["soup", "sauce"];
+
+export const FriedAdjectives = [
+  "fried",
+  "deep fried",
+  "tempura",
+];
+export const FriedFoods = [
+  "fritter",
+  "onion ring",
+  "fry",
+  "french fry",
+  "potato chip",
+  "doughnut",
+  "samosa",
+  "spring roll",
+  "churro",
+  "beignet",
+  "crisp",
+  "chip",
+  "pakora",
+  "fish and chip",
+  "corn dog",
+  "zeppole",
+  "arancini",
+  "falafel",
+]
+const PotentiallyFriedFoods = [
+  "chicken",
+  "fish",
+  "shrimp",
+  "calamari",
+  "rice",
+  "tofu",
+  "egg roll",
+  "plantain",
+  "green tomato",
+  "wonton",
+  ...Vegetables,
+  ...AmbiguousMeats,
+  ...FattyProteins,
+]
 
 // Because the food will be dynamically "pluralised" later, all food items should be in singular form.
 // This applies to food that would NEVER be in singular, such as "oat". A little confusing.
@@ -437,32 +465,7 @@ export const FoodCategoryMap: Record<FoodCategory, string[]> = {
       ),
     ].flat(),
   ],
-  "fatty-proteins": [
-    "steak",
-    "ribeye",
-    "brisket",
-    "short ribs",
-    "pork belly",
-    "bacon",
-    "spare ribs",
-    "lamb shoulder",
-    "duck leg",
-    "goose breast",
-    "salami",
-    "pepperoni",
-    "chorizo",
-    "corned beef",
-    "pâté",
-    "pate",
-    "sausage",
-    "chicken thigh",
-    "chicken drumstick",
-    ...[
-      ...AmbiguousMeats.map((meat) =>
-        FattyProteinAdjectives.map((adjective) => `${adjective} ${meat}`),
-      ),
-    ].flat(),
-  ],
+  "fatty-proteins": FattyProteins,
   "nuts-seeds": [
     "nut",
     "seed",
@@ -604,6 +607,7 @@ const pluralOverrides: Record<string, string> = {
   cookie: "cookies",
   patty: "patties",
   fry: "fries",
+  "french fry": "french fries",
   potato: "potatoes",
   tomato: "tomatoes",
   loaf: "loaves",
