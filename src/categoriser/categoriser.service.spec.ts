@@ -117,7 +117,7 @@ describe("CategoriserService", () => {
   it("should return the 'fried foods' category when fried foods are provided", () => {
     const crispsCategory = service.categorise("crisps");
     const friedChickenCategory = service.categorise("fried chicken");
-    const tempuraCategory = service.categorise("tempura");
+    const tempuraCategory = service.categorise("tempura courgette");
     const chickenBreastCategory = service.categorise("chicken breast");
 
     expect(crispsCategory).toBe("fried-foods");
