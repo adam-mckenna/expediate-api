@@ -80,6 +80,7 @@ export const WholeAdjectives = [
   "natural",
   "raw",
   "organic",
+  "brown",
 ];
 export const RefinedAdjectives = [
   "refined",

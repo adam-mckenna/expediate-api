@@ -1,0 +1,225 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/log": {
+      "post": {
+        "operationId": "LogController_create",
+        "parameters": [],
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/LogDto"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "A parsed, categorised and scored collection of food items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "allOf": [
+                    {
+                      "$ref": "#/components/schemas/CompleteLog"
+                    },
+                    {
+                      "example": {
+                        "totalScore": 6,
+                        "logs": {
+                          "fruit": {
+                            "score": 4,
+                            "logs": [
+                              {
+                                "score": 2,
+                                "food": "banana",
+                                "unit": "piece",
+                                "quantity": 2,
+                                "category": "fruit"
+                              }
+                            ]
+                          },
+                          "dairy": {
+                            "score": 2,
+                            "logs": [
+                              {
+                                "score": 2,
+                                "food": "milk",
+                                "unit": "ml",
+                                "quantity": 250,
+                                "category": "dairy"
+                              }
+                            ]
+                          }
+                        }
+                      }
+                    }
+                  ]
+                }
+              }
+            }
+          }
+        },
+        "summary": "A parsed and scored collection based on a food log input of comma-separated food items.",
+        "tags": [
+          "Log"
+        ]
+      }
+    },
+    "/categories": {
+      "get": {
+        "operationId": "CategoriserController_allCategories",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "An object containing all food categories, which themselves contain an array of their food items",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all categories and the food items inside.",
+        "tags": [
+          "Categoriser"
+        ]
+      }
+    },
+    "/categories/{category}": {
+      "get": {
+        "operationId": "CategoriserController_category",
+        "parameters": [
+          {
+            "name": "category",
+            "required": true,
+            "in": "path",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An array containing all the food items in the category",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get all food items inside a specific category by category name.",
+        "tags": [
+          "Categoriser"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Expediate API",
+    "description": "All endpoints available in the Expediate API",
+    "version": "1.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "CompleteLog": {
+        "type": "object",
+        "properties": {
+          "totalScore": {
+            "type": "number",
+            "description": "Total DQS."
+          },
+          "logs": {
+            "type": "object",
+            "description": "Category-keyed logs. Keys are category slugs (e.g. 'fruit', 'whole-grains').",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/CategoryLog"
+            }
+          }
+        },
+        "required": [
+          "totalScore",
+          "logs"
+        ]
+      },
+      "ScoredLogItem": {
+        "type": "object",
+        "properties": {
+          "score": {
+            "type": "number",
+            "description": "DQS for this food item."
+          },
+          "food": {
+            "type": "string",
+            "description": "The food item logged."
+          },
+          "unit": {
+            "type": "string",
+            "description": "The unit used to log the food (e.g. grams, serving, handful, ml, etc).",
+            "nullable": true
+          },
+          "quantity": {
+            "type": "number",
+            "description": "Quantity consumed, based on unit."
+          },
+          "category": {
+            "type": "string",
+            "description": "DQS food category."
+          }
+        },
+        "required": [
+          "score",
+          "food",
+          "unit",
+          "quantity",
+          "category"
+        ]
+      },
+      "CategoryLog": {
+        "type": "object",
+        "properties": {
+          "score": {
+            "type": "number",
+            "description": "Score total for this category."
+          },
+          "logs": {
+            "description": "All scored log items in this category.",
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ScoredLogItem"
+            }
+          }
+        },
+        "required": [
+          "score",
+          "logs"
+        ]
+      },
+      "LogDto": {
+        "type": "object",
+        "properties": {
+          "log": {
+            "type": "string",
+            "description": "A comma-separated list of all the food ate"
+          }
+        },
+        "required": [
+          "log"
+        ]
+      }
+    }
+  }
+}

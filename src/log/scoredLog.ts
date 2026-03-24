@@ -1,6 +1,6 @@
 import { FoodCategory } from "src/categoriser/category.type";
 import { Unit } from "src/transformer/units.type";
-import { ApiProperty } from "@nestjs/swagger";
+import { ApiProperty, getSchemaPath } from "@nestjs/swagger";
 
 export class ScoredLogItem {
   @ApiProperty({ description: "DQS for this food item." })
@@ -43,7 +43,7 @@ export class CompleteLog {
     description:
       "Category-keyed logs. Keys are category slugs (e.g. 'fruit', 'whole-grains').",
     type: "object",
-    additionalProperties: { type: "CategoryLog" },
+    additionalProperties: { $ref: getSchemaPath(CategoryLog) },
   })
   logs: Record<string, CategoryLog>;
 }
